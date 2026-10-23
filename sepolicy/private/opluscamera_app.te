@@ -25,21 +25,49 @@ allow opluscamera_app {
     location_service
     media_communication_service
     media_session_service
+    mediaextractor_service
     mediametrics_service
     mediaserver_service
+    mount_service
+    netstats_service
+    notification_service
     power_service
+    protolog_configuration_service
+    radio_service
+    sensitive_content_protection_service
+    sensorservice_service
+    shortcut_service
     surfaceflinger_service
     thermal_service
     trust_service
+    uimode_service
     user_service
     vibrator_service
+    vibrator_manager_service
+    virtual_device_native_service
     voiceinteraction_service
+    webviewupdate_service
+    wifi_service
     window_service
 }:service_manager find;
+
+# Binder calls
+binder_call(opluscamera_app, gpuservice)
+binder_call(opluscamera_app, system_suspend_server)
+
+# Allow camera HAL client
+not_recovery(`hal_client_domain(opluscamera_app, hal_camera)')
+
+# Allow loading camera vendor/odm libraries and configs
+allow opluscamera_app same_process_hal_file:file rx_file_perms;
+allow opluscamera_app vendor_configs_file:file r_file_perms;
+allow opluscamera_app vendor_configs_file:dir r_dir_perms;
+
+# Camera device nodes
+allow opluscamera_app gpu_device:chr_file rw_file_perms;
 
 # Properties
 get_prop(opluscamera_app, exported_system_prop)
 set_prop(opluscamera_app, exported_system_prop)
-
-# Camera device nodes
-allow opluscamera_app gpu_device:chr_file rw_file_perms;
+get_prop(opluscamera_app, vendor_oplus_camera_prop)
+get_prop(opluscamera_app, system_oplus_project_prop)

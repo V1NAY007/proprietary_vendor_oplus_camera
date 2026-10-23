@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <library name="oplus-camera-fwk"
+        file="/system_ext/framework/oplus-camera-fwk.jar" />
+    <library name="oplus-camera-fwk"
+        file="/system_ext/framework/oplus-camera-fwk.jar" />
+    <library name = "com.oplus.camera.unit.sdk"
+        file = "/product/framework/com.oplus.camera.unit.sdk.jar"
+        dependency="oplus-camera-fwk" />
+    <library name = "com.oppo.camera.unit.sdk"
+        file = "/product/framework/com.oplus.camera.unit.sdk.jar"
+        dependency="oplus-camera-fwk" />
+    <library name = "com.oplus.camera.unit.sdk.adapter"
+        file = "/product/framework/com.oplus.camera.unit.sdk.adapter.jar"
+        dependency="oplus-camera-fwk" />
+    <library name="androidx.camera.extensions.impl"
+        file ="/system_ext/framework/androidx.camera.extensions.impl.jar"/>	
+</permissions>

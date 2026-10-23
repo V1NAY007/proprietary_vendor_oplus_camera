@@ -1,0 +1,45 @@
+typeattribute opluscamera_app coredomain;
+
+app_domain(opluscamera_app)
+net_domain(opluscamera_app)
+
+# Allow camera app to find standard system services
+allow opluscamera_app {
+    activity_service
+    activity_task_service
+    app_function_service
+    audio_service
+    audioserver_service
+    autofill_service
+    batteryproperties_service
+    batterystats_service
+    battery_service
+    cameraserver_service
+    content_capture_service
+    content_service
+    device_policy_service
+    device_state_service
+    gpu_service
+    hal_system_suspend_service
+    legacy_permission_service
+    location_service
+    media_communication_service
+    media_session_service
+    mediametrics_service
+    mediaserver_service
+    power_service
+    surfaceflinger_service
+    thermal_service
+    trust_service
+    user_service
+    vibrator_service
+    voiceinteraction_service
+    window_service
+}:service_manager find;
+
+# Properties
+get_prop(opluscamera_app, exported_system_prop)
+set_prop(opluscamera_app, exported_system_prop)
+
+# Camera device nodes
+allow opluscamera_app gpu_device:chr_file rw_file_perms;

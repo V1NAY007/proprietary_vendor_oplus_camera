@@ -9,3 +9,4 @@ oplus.camera.orms                   u:object_r:exported_system_prop:s0
 
 # Region
 persist.sys.oppo.region             u:object_r:exported_system_prop:s0
+ro.com.google.lens.oem_camera_package u:object_r:exported_system_prop:s0

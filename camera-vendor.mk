@@ -48,4 +48,5 @@ PRODUCT_PACKAGES += \
     OplusCamera \
     oplus-support-wrapper \
     com.oplus.camera.unit.sdk.adapter \
-    com.oplus.camera.unit.sdk
+    com.oplus.camera.unit.sdk \
+    androidx.camera.extensions.impl

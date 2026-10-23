@@ -1,0 +1,15 @@
+//
+// Copyright (C) 2024 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+java_library {
+    name: "oplus-camera-fwk",
+    installable: true,
+    system_ext_specific: true,
+
+    srcs: [
+        "src/**/*.java",
+    ],
+}

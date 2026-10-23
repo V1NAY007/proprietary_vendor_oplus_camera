@@ -653,3 +653,10 @@ dex_import {
 	system_ext_specific: true,
 }
 
+dex_import {
+	name: "androidx.camera.extensions.impl",
+	owner: "oplus",
+	jars: ["proprietary/system_ext/framework/androidx.camera.extensions.impl.jar"],
+	system_ext_specific: true,
+}
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Privapp permission whitelist for OPlus Camera (com.oplus.camera).
+    Permissions derived from com.oplus.camera AndroidManifest.xml and stock dump.
+
+    Note: The following permissions requested in the APK manifest are signature-only
+    or OPlus-framework-specific and CANNOT be granted via privapp allowlist:
+      - android.permission.DEVICE_POWER (signature)
+      - android.permission.INTERACT_ACROSS_USERS_FULL (signature)
+      - android.permission.MANAGE_APP_OPS_MODES (signature)
+      - android.permission.CONTROL_KEYGUARD (signature)
+      - android.permission.CONTROL_DISPLAY_BRIGHTNESS (signature)
+      - android.permission.MANAGE_NOTIFICATIONS (signature)
+      - android.permission.STATUS_BAR_SERVICE (signature)
+      - android.permission.MANAGE_EXTERNAL_STORAGE (signature|appop)
+      - android.permission.REQUEST_INSTALL_PACKAGES (signature|appop)
+      - oplus.permission.APP_SETTING (OPlus framework signature)
+      - oplus.permission.OPLUS_COMPONENT_SAFE (OPlus framework signature)
+      - com.oplus.permission.safe.* (OPlus framework signature)
+      - com.oppo.permission.safe.* (OPlus framework signature)
+      - com.heytap.accessory.permission.ACCESSORY_FRAMEWORK (HeyTap signature)
+      - com.oplus.synergy.permission.NORMAL_ENGINE (OPlus synergy signature)
+      - com.oplusos.videoeditor.camera.permission.TEMPLATE (Soloop signature)
+-->
+<permissions>
+    <privapp-permissions package="com.oplus.camera">
+        <permission name="android.permission.INTERACT_ACROSS_USERS" />
+        <permission name="android.permission.SUBSCRIBE_TO_KEYGUARD_LOCKED_STATE" />
+        <permission name="android.permission.SYSTEM_CAMERA" />
+        <permission name="android.permission.TURN_SCREEN_ON" />
+        <permission name="android.permission.UPDATE_DEVICE_STATS" />
+        <permission name="android.permission.WRITE_MEDIA_STORAGE" />
+        <permission name="android.permission.WRITE_SECURE_SETTINGS" />
+        <permission name="mediatek.permission.ACCESS_APU_SYS" />
+    </privapp-permissions>
+</permissions>

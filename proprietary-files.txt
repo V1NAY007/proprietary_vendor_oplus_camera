@@ -3,6 +3,7 @@
 
 # Apps
 my_product/app/OplusCamera/OplusCamera.apk:system_ext/priv-app/OplusCamera/OplusCamera.apk|ac45e8e227d4823034db9349d6fb105b9a87a968;OVERRIDES=Camera2,GoogleCameraGo
+my_stock/priv-app/OppoGallery2/OppoGallery2.apk:system_ext/priv-app/OppoGallery2/OppoGallery2.apk|501796fe9290f5d4bec010161d0908477881fb39;OVERRIDES=Gallery2
 system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk|a4b5ed0940007b3dd38d9c25c43b7419744c47dc
 
 # Framework

@@ -6,6 +6,7 @@ Modular, prebuilt stock OPlus Camera stack for AOSP and LineageOS custom ROM bui
 
 ## Features
 * **Stock OPlus Camera App**: Prebuilt `com.oplus.camera` with ColorOS imaging features, portrait modes, night mode, and video stabilization.
+* **Stock OnePlus Gallery App**: Prebuilt `OppoGallery2` (`com.oneplus.gallery`) providing full gallery, preview, editor, and Google Lens OEM image integration.
 * **Self-Contained Framework**: Built-in `oplus-camera-fwk` stub framework providing all necessary `IOplusCameraManager`, display, and windowing interfaces required by the OPlus Camera unit SDK.
 * **Surface Composer Shims**: Built-in `libgui_shim_opluscamera` for smooth preview and blur effects without patching ROM frameworks.
 * **Clean SEPolicy**: Dedicated `opluscamera_app` domain with appropriate `privapp_data_file` and binder permissions.

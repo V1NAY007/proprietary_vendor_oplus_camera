@@ -46,6 +46,7 @@ PRODUCT_COPY_FILES += \
 PRODUCT_PACKAGES += \
     OplusAppPlatform \
     OplusCamera \
+    OppoGallery2 \
     oplus-support-wrapper \
     androidx.camera.extensions.impl \
     com.oplus.camera.unit.sdk.adapter \

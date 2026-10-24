@@ -7,6 +7,4 @@ vendor.oplus.aps.                  u:object_r:vendor_camera_prop:s0
 vendor.oplus.enable.dump.flag      u:object_r:vendor_camera_prop:s0
 ro.vendor.oplus.camera.            u:object_r:vendor_camera_prop:s0
 ro.vendor.oplus.market.            u:object_r:vendor_camera_prop:s0
-vendor.explorer.awb.               u:object_r:vendor_camera_prop:s0
-vendor.oplus.camera.               u:object_r:vendor_camera_prop:s0
-vendor.oplus.                      u:object_r:vendor_camera_prop:s0
+

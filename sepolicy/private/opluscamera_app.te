@@ -69,5 +69,3 @@ allow opluscamera_app gpu_device:chr_file rw_file_perms;
 # Properties
 get_prop(opluscamera_app, exported_system_prop)
 set_prop(opluscamera_app, exported_system_prop)
-get_prop(opluscamera_app, vendor_oplus_camera_prop)
-get_prop(opluscamera_app, system_oplus_project_prop)

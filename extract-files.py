@@ -38,6 +38,9 @@ lib_fixups: lib_fixups_user_type = {
         'libXDocProcessSDK',
         'libYTCommon',
         'libmpbase',
+        'libextendfile',
+        'vendor.oplus.hardware.engcamera@1.0',
+        'vendor.oplus.hardware.virtual_device.camera.manager@1.0',
     ): lib_fixup_system_ext_suffix,
 }
 
@@ -340,6 +343,11 @@ blob_fixups: blob_fixups_user_type = {
         'system_ext/lib64/libsuperNight.oplus.so',
     ): blob_fixup()
         .add_needed('libgui_shim_opluscamera.so'),
+    (
+        'system_ext/lib64/libOplusSloganClient.so',
+        'system_ext/lib64/vendor.oplus.hardware.camera.slogan-V1-ndk_platform.so',
+    ): blob_fixup()
+        .replace_needed('android.hardware.common-V2-ndk_platform.so', 'android.hardware.common-V2-ndk.so'),
     'system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml': blob_fixup()
         .regex_replace(r'<\? xml.*?\?>', '<?xml version="1.0" encoding="utf-8"?>')
         .regex_replace(r'/system/system_ext/', '/system_ext/')
@@ -373,7 +381,6 @@ module = CameraExtractUtilsModule(
     blob_fixups=blob_fixups,
     lib_fixups=lib_fixups,
     namespace_imports=namespace_imports,
-    check_elf=False,
 )
 
 if __name__ == '__main__':

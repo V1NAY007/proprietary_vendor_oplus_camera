@@ -1,0 +1,1 @@
+allow cameraserver hal_oplus_virtual_camera_hwservice:hwservice_manager find;

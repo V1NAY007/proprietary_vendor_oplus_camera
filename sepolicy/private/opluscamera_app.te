@@ -57,6 +57,7 @@ binder_call(opluscamera_app, system_suspend_server)
 
 # Allow camera HAL client
 not_recovery(`hal_client_domain(opluscamera_app, hal_camera)')
+allow opluscamera_app hal_oplus_virtual_camera_hwservice:hwservice_manager find;
 
 # Allow loading camera vendor/odm libraries and configs
 allow opluscamera_app same_process_hal_file:file rx_file_perms;

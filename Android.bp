@@ -4852,3 +4852,10 @@ install_symlink {
     installed_location: "lib64/libOplusStringJNI.so",
     symlink_target: "/system_ext/lib64/libOplusStringJNI-extension.oplus.so",
 }
+
+install_symlink {
+    name: "system_ext_lib64_libSloganJni_so",
+    system_ext_specific: true,
+    installed_location: "lib64/libSloganJni.so",
+    symlink_target: "/system_ext/lib64/libSloganJni.oplus.so",
+}

@@ -803,4 +803,5 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     system_ext_lib64_libAPSClient-cmd-jni_so \
-    system_ext_lib64_libOplusStringJNI_so
+    system_ext_lib64_libOplusStringJNI_so \
+    system_ext_lib64_libSloganJni_so

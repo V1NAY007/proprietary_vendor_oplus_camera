@@ -405,6 +405,8 @@ blob_fixups: blob_fixups_user_type = {
         'system_ext/lib64/vendor.oplus.hardware.camera.slogan-V1-ndk_platform.so',
     ): blob_fixup()
         .replace_needed('android.hardware.common-V2-ndk_platform.so', 'android.hardware.common-V2-ndk.so'),
+    'system_ext/lib64/libSloganJni.oplus.so': blob_fixup()
+        .fix_soname(),
     'system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml': blob_fixup()
         .regex_replace(r'<\? xml.*?\?>', '<?xml version="1.0" encoding="utf-8"?>')
         .regex_replace(r'/system/system_ext/', '/system_ext/')

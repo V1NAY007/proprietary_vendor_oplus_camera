@@ -10,7 +10,8 @@ Modular, self-contained stock OPlus Camera and Gallery stack for AOSP and Lineag
 * **Self-Contained Framework**: Built-in `oplus-camera-fwk` stub framework providing all necessary `IOplusCameraManager`, display, device state, and windowing interfaces required by the OPlus Camera unit SDK.
 * **Automated SDK Patcher**: Automated smali and dex bytecode patching inside `extract-files.py` to ensure seamless AOSP compatibility without crashing on missing ColorOS system services.
 * **Surface Composer Shims**: Built-in `libgui_shim_opluscamera` for smooth preview and buffer detached callbacks without patching ROM frameworks.
-* **Clean SELinux Policy**: Dedicated `opluscamera_app` domain with appropriate `privapp_data_file`, binder, HAL, and property permissions.
+* **Modular SELinux Policy**: Dedicated `opluscamera_app` domain with appropriate permissions, self-contained inside `sepolicy/` so device trees don't get polluted or conflict with default camera apps (e.g. Aperture).
+* **Automatic VINTF Matrix**: Declares `vendor.oplus.hardware.virtual_device.camera.manager@1.0` directly via `opluscamera.mk` without device tree manual declarations.
 * **Universal & Modular**: Zero patches required in ROM source trees (`hardware/interfaces` or `frameworks/base`). Can be included or omitted cleanly via a single `device.mk` line.
 
 ---
@@ -28,37 +29,7 @@ Modular, self-contained stock OPlus Camera and Gallery stack for AOSP and Lineag
    $(call inherit-product-if-exists, vendor/oplus/camera/opluscamera.mk)
    ```
 
-3. **Required Device-Side Properties** (e.g. in `vendor.prop` or `system.prop`):
-   ```properties
-   # Camera package
-   persist.vendor.camera.privapp.list=com.oplus.camera
-   ro.com.google.lens.oem_camera_package=com.oplus.camera
-   ro.oplus.system.camera.name=com.oplus.camera
-   ro.oplus.camera.speechassist=true
-   ro.oplus.camera.defercap.support=true
-   ro.oplus.camera.defercap.all.quick.visible.support=true
-   ro.oplus.camera.quickshare.support=true
-
-   # Sensor resolutions (customize for your device, e.g. GT Neo 3):
-   ro.vendor.oplus.camera.backCamSize=50MP+8MP+2MP
-   ro.vendor.oplus.camera.frontCamSize=16MP
-   ro.vendor.oplus.camera.isSupportExplorer=0
-   ro.vendor.oplus.camera.isHasselbladCamera=0
-   oplus.software.camera.10bit=1
-   ```
-
-4. **VINTF Compatibility Matrix**:
-   Ensure `device_framework_matrix.xml` contains the virtual camera manager interface:
-   ```xml
-   <hal format="hidl" optional="true">
-       <name>vendor.oplus.hardware.virtual_device.camera.manager</name>
-       <version>1.0</version>
-       <interface>
-           <name>IVirtualCameraManager</name>
-           <instance>default</instance>
-       </interface>
-   </hal>
-   ```
+* **Note**: That single line is all that's required! `opluscamera.mk` automatically declares its own VINTF compatibility matrix, SELinux policy directories, camera package configs, and default camera properties. No edits in `BoardConfig.mk`, device tree `sepolicy/`, or `device_framework_matrix.xml` are needed.
 
 ---
 

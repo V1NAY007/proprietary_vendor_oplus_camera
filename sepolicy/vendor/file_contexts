@@ -538,3 +538,13 @@
 # This is labeled as public_adsprpcd_file as it needs to be read by apps
 # (e.g. Google Camera App)
 /mnt/vendor/dsp/fastrpc_shell_3                                              u:object_r:public_adsprpcd_file:s0
+
+# OPlus Camera daemons and libraries
+/data/vendor/camera_process(/.*)?                                               u:object_r:vendor_camera_data_file:s0
+/(odm|vendor/odm)/bin/hw/vendor\.oplus\.hardware\.cammidasservice-V1-service    u:object_r:hal_camera_default_exec:s0
+/(odm|vendor/odm)/bin/hw/virtualcameraprovider                                  u:object_r:hal_camera_default_exec:s0
+/(odm|vendor/odm)/lib(64)?(/.*)?                                                u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/libmtkisp_metadata_v2\.so                                     u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/vendor\.mediatek\.hardware\.camera\.isphal@1\.0\.so           u:object_r:same_process_hal_file:s0
+/vendor/lib(64)?/vendor\.oplus\.hardware\.osense\.client-V1-ndk_platform\.so    u:object_r:same_process_hal_file:s0
+

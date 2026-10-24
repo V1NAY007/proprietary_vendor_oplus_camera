@@ -31,7 +31,9 @@ PRODUCT_SYSTEM_PROPERTIES += \
     ro.oplus.camera.speechassist=true \
     ro.oplus.camera.defercap.support=true \
     ro.oplus.camera.defercap.all.quick.visible.support=true \
-    ro.oplus.camera.quickshare.support=true
+    ro.oplus.camera.quickshare.support=true \
+    ro.oplus.display.screenhole.positon=511,33:569,91 \
+    ro.build.version.oplusrom=V15.0.0
 
 PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.camera.privapp.list=com.oplus.camera \
@@ -39,6 +41,8 @@ PRODUCT_VENDOR_PROPERTIES += \
     ro.vendor.oplus.camera.backCamSize=50MP+8MP+2MP \
     ro.vendor.oplus.camera.isSupportExplorer=0 \
     ro.vendor.oplus.camera.isHasselbladCamera=0 \
+    ro.vendor.oplus.market.name=RMX3563 \
+    ro.vendor.oplus.market.enname=realme GT Neo 3 \
     oplus.software.camera.10bit=1
 
 PRODUCT_PRODUCT_PROPERTIES += \

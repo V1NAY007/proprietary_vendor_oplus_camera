@@ -9,6 +9,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_PACKAGES += \
     OplusCameraOverlayIcon \
     libgui_shim_opluscamera \
+    libcamera_device_shim \
     oplus-camera-fwk
 
 # Init

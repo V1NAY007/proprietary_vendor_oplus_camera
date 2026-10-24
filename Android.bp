@@ -4493,6 +4493,7 @@ cc_prebuilt_library_shared {
                 "proprietary/odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.4-impl.so",
             ],
             shared_libs: [
+                "libcamera_device_shim",
                 "libcamera_metadata",
                 "libcutils",
                 "libhidlbase",
@@ -4537,6 +4538,7 @@ cc_prebuilt_library_shared {
                 "proprietary/odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.5-impl.so",
             ],
             shared_libs: [
+                "libcamera_device_shim",
                 "libcamera_metadata",
                 "libcutils",
                 "libhidlbase",
@@ -4582,6 +4584,7 @@ cc_prebuilt_library_shared {
                 "proprietary/odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.6-impl.so",
             ],
             shared_libs: [
+                "libcamera_device_shim",
                 "libcamera_metadata",
                 "libcutils",
                 "libhidlbase",
@@ -4628,6 +4631,7 @@ cc_prebuilt_library_shared {
                 "proprietary/odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.7-impl.so",
             ],
             shared_libs: [
+                "libcamera_device_shim",
                 "libcamera_metadata",
                 "libcutils",
                 "libhidlbase",

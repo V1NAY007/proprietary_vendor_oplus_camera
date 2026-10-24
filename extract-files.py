@@ -359,6 +359,15 @@ def decrypt_oplus_camera_configs(ctx, file, file_path, *args, **kwargs):
             f.write(dec_clean)
 
 
+def patch_oplus_app_platform(ctx, file, file_path, *args, **kwargs):
+    dex_path = os.path.join(os.path.dirname(__file__), 'configs', 'dex', 'classes_featureconfig.dex')
+    with zipfile.ZipFile(file_path, 'r') as zin:
+        has_classes2 = 'classes2.dex' in zin.namelist()
+    if not has_classes2:
+        with zipfile.ZipFile(file_path, 'a') as zout:
+            zout.write(dex_path, 'classes2.dex')
+
+
 blob_fixups: blob_fixups_user_type = {
     (
         'odm/lib64/libAncHumBokeh.so',
@@ -382,6 +391,14 @@ blob_fixups: blob_fixups_user_type = {
 
     'odm/lib64/vendor.oplus.hardware.virtual_device.camera.manager@1.0-impl.so': blob_fixup()
         .replace_needed('libui.so', 'libui-v34.so'),
+
+    (
+        'odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.4-impl.so',
+        'odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.5-impl.so',
+        'odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.6-impl.so',
+        'odm/lib64/vendor.oplus.hardware.virtual_device.camera.provider@2.7-impl.so',
+    ): blob_fixup()
+        .add_needed('libcamera_device_shim.so'),
 
     'odm/etc/camera/config/oplus_camera_config': blob_fixup()
         .call(decrypt_oplus_camera_configs),
@@ -416,6 +433,8 @@ blob_fixups: blob_fixups_user_type = {
         .regex_replace(r'(<library name\s*=\s*"com\.oplus\.camera\.unit\.sdk\.adapter"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />'),
     'system_ext/framework/com.oplus.camera.unit.sdk.jar': blob_fixup()
         .call(patch_camera_unit_sdk),
+    'system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk': blob_fixup()
+        .call(patch_oplus_app_platform),
 }
 
 

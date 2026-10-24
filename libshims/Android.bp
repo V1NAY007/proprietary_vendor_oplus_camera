@@ -1,5 +1,5 @@
 //
-// Copyright (C) 2024 The LineageOS Project
+// Copyright (C) 2024-2026 The LineageOS Project
 //
 // SPDX-License-Identifier: Apache-2.0
 //
@@ -9,4 +9,14 @@ cc_library {
     srcs: ["libgui_shim_opluscamera.c"],
     system_ext_specific: true,
     vendor_available: true,
+}
+
+cc_library {
+    name: "libcamera_device_shim",
+    srcs: ["libcamera_device_shim.cpp"],
+    shared_libs: [
+        "camera.device@3.2-impl",
+        "camera.device@3.3-impl",
+    ],
+    vendor: true,
 }

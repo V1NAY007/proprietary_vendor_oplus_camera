@@ -2,16 +2,6 @@
 <permissions>
     <library name="oplus-camera-fwk"
         file="/system_ext/framework/oplus-camera-fwk.jar" />
-    <library name="oplus-camera-fwk"
-        file="/system_ext/framework/oplus-camera-fwk.jar" />
-    <library name="oplus-camera-fwk"
-        file="/system_ext/framework/oplus-camera-fwk.jar" />
-    <library name="oplus-camera-fwk"
-        file="/system_ext/framework/oplus-camera-fwk.jar" />
-    <library name="oplus-camera-fwk"
-        file="/system_ext/framework/oplus-camera-fwk.jar" />
-    <library name="oplus-camera-fwk"
-        file="/system_ext/framework/oplus-camera-fwk.jar" />
     <library name = "com.oplus.camera.unit.sdk"
         file = "/product/framework/com.oplus.camera.unit.sdk.jar"
         dependency="oplus-camera-fwk" />

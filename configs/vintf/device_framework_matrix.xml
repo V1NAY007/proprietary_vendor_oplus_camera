@@ -1,0 +1,10 @@
+<compatibility-matrix version="9.0" type="framework">
+    <hal format="hidl" optional="true">
+        <name>vendor.oplus.hardware.virtual_device.camera.manager</name>
+        <version>1.0</version>
+        <interface>
+            <name>IVirtualCameraManager</name>
+            <instance>default</instance>
+        </interface>
+    </hal>
+</compatibility-matrix>

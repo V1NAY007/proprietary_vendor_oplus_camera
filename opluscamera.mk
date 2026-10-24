@@ -26,10 +26,29 @@ PRODUCT_COPY_FILES += \
     vendor/oplus/camera/configs/sysconfig/hiddenapi-package-oplus-whitelist.xml:$(TARGET_COPY_OUT_SYSTEM)/etc/sysconfig/hiddenapi-package-oplus-whitelist.xml
 
 # Properties
+PRODUCT_SYSTEM_PROPERTIES += \
+    ro.oplus.system.camera.name=com.oplus.camera \
+    ro.oplus.camera.speechassist=true \
+    ro.oplus.camera.defercap.support=true \
+    ro.oplus.camera.defercap.all.quick.visible.support=true \
+    ro.oplus.camera.quickshare.support=true
+
+PRODUCT_VENDOR_PROPERTIES += \
+    persist.vendor.camera.privapp.list=com.oplus.camera \
+    ro.vendor.oplus.camera.frontCamSize=16MP \
+    ro.vendor.oplus.camera.backCamSize=50MP+8MP+2MP \
+    ro.vendor.oplus.camera.isSupportExplorer=0 \
+    ro.vendor.oplus.camera.isHasselbladCamera=0 \
+    oplus.software.camera.10bit=1
+
 PRODUCT_PRODUCT_PROPERTIES += \
     persist.vendor.camera.privapp.list=com.oplus.camera \
     ro.com.google.lens.oem_camera_package=com.oplus.camera \
     ro.com.google.lens.oem_image_package=com.oneplus.gallery
+
+# VINTF Compatibility Matrix
+DEVICE_FRAMEWORK_COMPATIBILITY_MATRIX_FILE += \
+    vendor/oplus/camera/configs/vintf/device_framework_matrix.xml
 
 # Photo
 $(call soong_config_set,camera,package_name,com.oplus.camera)

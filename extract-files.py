@@ -22,8 +22,11 @@ from extract_utils.main import (
 )
 
 namespace_imports = [
+    'device/oplus/zephyr',
+    'hardware/mediatek/libion_mtk',
     'hardware/oplus',
     'vendor/oplus/camera',
+    'vendor/oplus/zephyr',
 ]
 
 
@@ -333,7 +336,61 @@ def patch_camera_unit_sdk(ctx, file, file_path, *args, **kwargs):
         shutil.move(new_jar, file_path)
 
 
+def decrypt_oplus_camera_configs(ctx, file, file_path, *args, **kwargs):
+    from cryptography.hazmat.primitives.ciphers import Cipher, algorithms, modes
+    from cryptography.hazmat.backends import default_backend
+
+    key = bytes.fromhex('6f2170406c247525535e4326412a4d28')
+    with open(file_path, 'rb') as f:
+        data = f.read()
+
+    if len(data) >= 9 and data[0] == 0x01 and data[-1] == 0xff:
+        payload = data[4:-4]
+        cipher = Cipher(algorithms.AES(key), modes.ECB(), backend=default_backend())
+        dec = cipher.decryptor().update(payload)
+        dec_clean = dec.rstrip(b'\x00')
+        if len(dec_clean) > 0:
+            last_byte = dec_clean[-1]
+            if 1 <= last_byte <= 16:
+                pad_len = last_byte
+                if dec_clean[-pad_len:] == bytes([pad_len]) * pad_len:
+                    dec_clean = dec_clean[:-pad_len]
+        with open(file_path, 'wb') as f:
+            f.write(dec_clean)
+
+
 blob_fixups: blob_fixups_user_type = {
+    (
+        'odm/lib64/libAncHumBokeh.so',
+        'odm/lib64/libAncHumBokehPost.so',
+        'odm/lib64/libAncHumVideoBase.so',
+        'odm/lib64/libAncHumVideoBasePost.so',
+    ): blob_fixup()
+        .clear_symbol_version('AHardwareBuffer_allocate')
+        .clear_symbol_version('AHardwareBuffer_lock')
+        .clear_symbol_version('AHardwareBuffer_release')
+        .clear_symbol_version('AHardwareBuffer_unlock'),
+
+    'odm/bin/hw/vendor.oplus.hardware.cammidasservice-V1-service': blob_fixup()
+        .replace_needed('android.frameworks.stats-V1-ndk_platform.so', 'android.frameworks.stats-V1-ndk.so'),
+
+    'odm/lib64/libAlgoProcess.so': blob_fixup()
+        .replace_needed('android.hardware.graphics.common-V2-ndk_platform.so', 'android.hardware.graphics.common-V7-ndk.so'),
+
+    'odm/etc/init/virtualcameraprovider.rc': blob_fixup()
+        .regex_replace(r'.*vendor\.oplus\.hardware\.virtual_device\.camera\.manager@1\.0::IVirtualCameraManager default\n', ''),
+
+    'odm/lib64/vendor.oplus.hardware.virtual_device.camera.manager@1.0-impl.so': blob_fixup()
+        .replace_needed('libui.so', 'libui-v34.so'),
+
+    'odm/etc/camera/config/oplus_camera_config': blob_fixup()
+        .call(decrypt_oplus_camera_configs),
+
+    (
+        'odm/lib64/libcdsprpc.so',
+        'odm/lib64/libCOppLceTonemapAPI.so',
+    ): blob_fixup()
+        .remove_needed('libstdc++.so'),
     (
         'system_ext/lib64/libAPSClient-cmd-jni.so',
         'system_ext/lib64/libAPSClient-cmd-jni-extension.oplus.so',
@@ -351,7 +408,7 @@ blob_fixups: blob_fixups_user_type = {
     'system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml': blob_fixup()
         .regex_replace(r'<\? xml.*?\?>', '<?xml version="1.0" encoding="utf-8"?>')
         .regex_replace(r'/system/system_ext/', '/system_ext/')
-        .regex_replace(r'<permissions>', '<permissions>\n    <library name="oplus-camera-fwk"\n        file="/system_ext/framework/oplus-camera-fwk.jar" />')
+        .regex_replace(r'<permissions>(?!\s*<library name="oplus-camera-fwk")', '<permissions>\n    <library name="oplus-camera-fwk"\n        file="/system_ext/framework/oplus-camera-fwk.jar" />')
         .regex_replace(r'(<library name\s*=\s*"com\.oplus\.camera\.unit\.sdk"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />')
         .regex_replace(r'(<library name\s*=\s*"com\.oppo\.camera\.unit\.sdk"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />')
         .regex_replace(r'(<library name\s*=\s*"com\.oplus\.camera\.unit\.sdk\.adapter"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />'),

@@ -1,5 +1,6 @@
 package android.os.customize;
 
+import android.content.ComponentName;
 import android.content.Context;
 
 public class OplusCustomizeRestrictionManager {
@@ -10,6 +11,14 @@ public class OplusCustomizeRestrictionManager {
     }
 
     public boolean getForbidRecordScreenState() {
+        return false;
+    }
+
+    public boolean isFloatTaskDisabled(ComponentName componentName) {
+        return false;
+    }
+
+    public boolean setFloatTaskDisabled(ComponentName componentName, boolean disabled) {
         return false;
     }
 }

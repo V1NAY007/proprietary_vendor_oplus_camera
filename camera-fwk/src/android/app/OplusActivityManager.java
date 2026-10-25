@@ -34,4 +34,34 @@ public class OplusActivityManager {
     }
 
     public void startActivity(Intent intent) {}
+
+    public void addBackgroundRestrictedInfo(String pkg, List<String> list) {}
+
+    public void addPreventIndulgeList(List<String> list) {}
+
+    public List<ActivityManager.RunningTaskInfo> getFilteredTasks(int maxNum, boolean filterOnlyVisibleRecents) {
+        return new ArrayList<>();
+    }
+
+    public List<ActivityManager.RunningTaskInfo> getFilteredTasks(int maxNum, int filterOnlyVisibleRecents, int flags) {
+        return new ArrayList<>();
+    }
+
+    public List<String> getTaskPkgList(int taskId) {
+        return new ArrayList<>();
+    }
+
+    public void handleAppFromControlCenter(String pkg, int type) {}
+
+    public boolean isAppCallRefuseMode() {
+        return false;
+    }
+
+    public void setAllowLaunchApps(List<String> list) {}
+
+    public void setAppCallRefuseMode(boolean enable) {}
+
+    public void setChildSpaceMode(boolean enable) {}
+
+    public void setPreventIndulgeController(Object controller) {}
 }

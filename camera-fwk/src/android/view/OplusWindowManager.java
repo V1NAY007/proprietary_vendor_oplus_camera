@@ -17,4 +17,16 @@ public class OplusWindowManager {
     public boolean setPreferredDisplayMode(int mode) {
         return false;
     }
+
+    public int getLongshotSurfaceLayerByType(int type) {
+        return 0;
+    }
+
+    public boolean isInputShow() {
+        return false;
+    }
+
+    public void registerOplusWindowStateObserver(IOplusWindowStateObserver observer) {}
+
+    public void unregisterOplusWindowStateObserver(IOplusWindowStateObserver observer) {}
 }

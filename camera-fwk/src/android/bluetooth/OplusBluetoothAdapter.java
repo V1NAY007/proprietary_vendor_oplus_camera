@@ -13,4 +13,8 @@ public class OplusBluetoothAdapter {
     public boolean isBluetoothRecordConnected() {
         return false;
     }
+
+    public int getBluetoothConnectionCount() {
+        return 0;
+    }
 }

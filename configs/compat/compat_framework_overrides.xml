@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Static AppCompat framework overrides for OPlus Camera and Gallery packages.
+    Disables DYNAMIC_RECEIVER_EXPLICIT_EXPORT_REQUIRED (changeId 161145287) to prevent
+    SecurityException on Android 14+ when registering broadcast receivers without explicit
+    RECEIVER_EXPORTED or RECEIVER_NOT_EXPORTED flags.
+-->
+<overrides>
+    <change-overrides changeId="161145287">
+        <validated>
+            <override-value packageName="com.oneplus.gallery" enabled="false" />
+            <override-value packageName="com.oplus.camera" enabled="false" />
+        </validated>
+        <deferred>
+            <override-value packageName="com.oneplus.gallery" enabled="false" />
+            <override-value packageName="com.oplus.camera" enabled="false" />
+        </deferred>
+        <raw>
+            <raw-override-value packageName="com.oneplus.gallery" enabled="false" />
+            <raw-override-value packageName="com.oplus.camera" enabled="false" />
+        </raw>
+    </change-overrides>
+</overrides>

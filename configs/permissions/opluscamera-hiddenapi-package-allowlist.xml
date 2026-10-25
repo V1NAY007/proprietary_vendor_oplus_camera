@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <config>
     <hidden-api-whitelisted-app package="com.oplus.camera" />
+    <hidden-api-whitelisted-app package="com.oneplus.gallery" />
+    <allow-in-power-save package="com.oplus.camera" />
+    <allow-in-power-save package="com.oneplus.gallery" />
+    <allow-in-data-usage-save package="com.oplus.camera" />
+    <allow-in-data-usage-save package="com.oneplus.gallery" />
+    <allow-unthrottled-location package="com.oplus.camera" />
+    <allow-ignore-location-settings package="com.oplus.camera" />
 </config>

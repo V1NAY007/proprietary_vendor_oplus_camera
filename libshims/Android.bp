@@ -7,6 +7,10 @@
 cc_library {
     name: "libgui_shim_opluscamera",
     srcs: ["libgui_shim_opluscamera.c"],
+    shared_libs: [
+        "liblog",
+        "libdl",
+    ],
     system_ext_specific: true,
     vendor_available: true,
 }

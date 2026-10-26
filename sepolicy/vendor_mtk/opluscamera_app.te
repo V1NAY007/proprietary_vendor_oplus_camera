@@ -1,1 +1,20 @@
 r_dir_file(opluscamera_app, persist_camera_file)
+
+# MediaTek Camera HAL & Offline ISP (ISPHAL / BGService)
+hal_client_domain(opluscamera_app, hal_mtk_bgs)
+binder_call(opluscamera_app, mtk_hal_camera)
+binder_call(mtk_hal_camera, opluscamera_app)
+
+# MTK JPEG hardware encoder/decoder
+allow opluscamera_app proc_mtk_jpeg:file rw_file_perms;
+allowxperm opluscamera_app proc_mtk_jpeg:file ioctl {
+    JPG_BRIDGE_DEC_IO_LOCK
+    JPG_BRIDGE_DEC_IO_WAIT
+    JPG_BRIDGE_DEC_IO_UNLOCK
+};
+
+# Picture Quality HAL
+hal_client_domain(opluscamera_app, hal_mtk_pq)
+
+# Properties
+get_prop(opluscamera_app, vendor_mtk_cam_security_prop)

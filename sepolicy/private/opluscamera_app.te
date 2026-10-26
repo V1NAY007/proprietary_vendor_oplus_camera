@@ -66,8 +66,13 @@ allow opluscamera_app vendor_configs_file:dir r_dir_perms;
 
 # Camera device nodes
 allow opluscamera_app gpu_device:chr_file rw_file_perms;
+allow opluscamera_app unlabeled:filesystem getattr;
 
 # Properties
 get_prop(opluscamera_app, exported_system_prop)
 set_prop(opluscamera_app, exported_system_prop)
 get_prop(opluscamera_app, vendor_camera_prop)
+get_prop(opluscamera_app, vendor_oplus_camera_prop)
+
+# Audit
+dontaudit opluscamera_app selinuxfs:file r_file_perms;

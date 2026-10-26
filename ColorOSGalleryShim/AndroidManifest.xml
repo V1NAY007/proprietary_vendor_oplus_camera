@@ -19,6 +19,14 @@
             <action android:name="android.intent.action.VIEW" />
             <data android:mimeType="video/*" />
         </intent>
+        <intent>
+            <action android:name="com.android.camera.action.REVIEW" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="com.android.camera.action.REVIEW" />
+            <data android:mimeType="video/*" />
+        </intent>
     </queries>
 
     <application
@@ -40,8 +48,9 @@
         <activity
             android:name=".app.MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay"
-            android:launchMode="singleTask">
+            android:theme="@android:style/Theme.Translucent.NoTitleBar"
+            android:excludeFromRecents="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.DEFAULT" />
@@ -71,18 +80,18 @@
             android:name="com.oppo.gallery3d.app.ViewGalleryInner"
             android:targetActivity=".app.MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity-alias
             android:name="com.oppo.gallery3d.app.ViewGallery"
             android:targetActivity=".app.MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
 
         <activity-alias
             android:name="com.oneplus.gallery.FilmstripServiceActivity"
             android:targetActivity=".app.MainActivity"
             android:exported="true"
-            android:theme="@android:style/Theme.NoDisplay" />
+            android:theme="@android:style/Theme.Translucent.NoTitleBar" />
     </application>
 </manifest>

@@ -6,6 +6,9 @@
 
 on post-fs-data
 
+    # Camera persist directory
+    mkdir /mnt/vendor/persist/camera 0755 cameraserver cameraserver
+
     # Bind mount fastrpc_shell_3 for labelling
     mkdir /mnt/vendor/dsp 0770 root root
     copy /vendor/dsp/cdsp/fastrpc_shell_3 /mnt/vendor/dsp/fastrpc_shell_3

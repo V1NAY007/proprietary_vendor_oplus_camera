@@ -3,11 +3,15 @@ $(call inherit-product, vendor/oplus/camera/camera-vendor.mk)
 
 # Blob dependencies
 PRODUCT_PACKAGES += \
-    android.hardware.graphics.common-V3-ndk.vendor
+    android.hardware.graphics.common-V3-ndk.vendor \
+    android.hardware.graphics.common-V7-ndk.vendor \
+    android.hardware.graphics.mapper@4.0 \
+    libgralloctypes.vendor
 
 # Packages
 PRODUCT_PACKAGES += \
     OplusCameraOverlayIcon \
+    ColorOSGalleryShim \
     libgui_shim_opluscamera \
     libcamera_device_shim \
     libarcsoft_beauty_ex \
@@ -40,6 +44,7 @@ PRODUCT_SYSTEM_PROPERTIES += \
 
 PRODUCT_VENDOR_PROPERTIES += \
     persist.vendor.camera.privapp.list=com.oplus.camera \
+    vendor.camera.aux.packagelist=com.oplus.camera,org.lineageos.aperture \
     ro.vendor.oplus.camera.frontCamSize=16MP \
     ro.vendor.oplus.camera.backCamSize=50MP+8MP+2MP \
     ro.vendor.oplus.camera.isSupportExplorer=0 \

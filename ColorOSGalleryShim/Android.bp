@@ -1,0 +1,14 @@
+//
+// Copyright (C) 2026 The LineageOS Project
+//
+// SPDX-License-Identifier: Apache-2.0
+//
+
+android_app {
+    name: "ColorOSGalleryShim",
+    srcs: ["src/**/*.java"],
+    system_ext_specific: true,
+    certificate: "platform",
+    privileged: true,
+    platform_apis: true,
+}

@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+    Copyright (C) 2026 The LineageOS Project
+    SPDX-License-Identifier: Apache-2.0
+-->
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.coloros.gallery3d"
+    android:versionCode="1"
+    android:versionName="1.0">
+
+    <queries>
+        <package android:name="com.oneplus.gallery" />
+        <package android:name="com.google.android.apps.photos" />
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="image/*" />
+        </intent>
+        <intent>
+            <action android:name="android.intent.action.VIEW" />
+            <data android:mimeType="video/*" />
+        </intent>
+    </queries>
+
+    <application
+        android:label="Gallery"
+        android:hasCode="true"
+        android:supportsRtl="true">
+
+        <activity
+            android:name=".app.MainActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay"
+            android:launchMode="singleTask">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <category android:name="android.intent.category.APP_GALLERY" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="android.intent.action.VIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.android.camera.action.REVIEW" />
+                <category android:name="android.intent.category.DEFAULT" />
+                <data android:mimeType="image/*" />
+                <data android:mimeType="video/*" />
+                <data android:mimeType="*/*" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="com.oneplus.gallery.intent.action.LAUNCH_GALLERY" />
+                <category android:name="android.intent.category.DEFAULT" />
+            </intent-filter>
+        </activity>
+
+        <activity-alias
+            android:name="com.oppo.gallery3d.app.ViewGalleryInner"
+            android:targetActivity=".app.MainActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <activity-alias
+            android:name="com.oppo.gallery3d.app.ViewGallery"
+            android:targetActivity=".app.MainActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+
+        <activity-alias
+            android:name="com.oneplus.gallery.FilmstripServiceActivity"
+            android:targetActivity=".app.MainActivity"
+            android:exported="true"
+            android:theme="@android:style/Theme.NoDisplay" />
+    </application>
+</manifest>

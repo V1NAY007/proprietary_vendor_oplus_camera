@@ -26,6 +26,17 @@
         android:hasCode="true"
         android:supportsRtl="true">
 
+        <meta-data android:name="isSupportDoubleExposure" android:value="true" />
+        <meta-data android:name="isSupportBlurEdit" android:value="true" />
+        <meta-data android:name="isSupportEarlyStart" android:value="true" />
+        <meta-data android:name="isSupportAIIDPhoto" android:value="true" />
+        <meta-data android:name="isSupportSeamlessTransition" android:value="false" />
+        <meta-data android:name="isSupportWatermarkEdit" android:value="true" />
+        <meta-data android:name="isIntegrationUITransitionSupported" android:value="false" />
+        <meta-data android:name="isSupportQuickPhoto" android:value="true" />
+        <meta-data android:name="isSupportDefaultOpen" android:value="true" />
+        <meta-data android:name="isSupportLive" android:value="true" />
+
         <activity
             android:name=".app.MainActivity"
             android:exported="true"

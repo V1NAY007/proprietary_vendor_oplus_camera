@@ -5,6 +5,18 @@
 //
 
 cc_library {
+    name: "libarcsoft_beauty_ex",
+    srcs: ["libarcsoft_beauty_ex.cpp"],
+    shared_libs: [
+        "liblog",
+    ],
+    header_libs: [
+        "jni_headers",
+    ],
+    system_ext_specific: true,
+}
+
+cc_library {
     name: "libgui_shim_opluscamera",
     srcs: ["libgui_shim_opluscamera.c"],
     shared_libs: [

@@ -10,6 +10,7 @@ PRODUCT_PACKAGES += \
     OplusCameraOverlayIcon \
     libgui_shim_opluscamera \
     libcamera_device_shim \
+    libarcsoft_beauty_ex \
     oplus-camera-fwk
 
 # Init

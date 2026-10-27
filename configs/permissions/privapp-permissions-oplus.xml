@@ -43,6 +43,7 @@
 
     <!-- OPLUS gallery -->
     <privapp-permissions package="com.oneplus.gallery">
+        <permission name="android.permission.ACCESS_MEDIA_LOCATION"/>
         <permission name="android.permission.INTERACT_ACROSS_USERS"/>
         <permission name="android.permission.SCHEDULE_EXACT_ALARM"/>
         <permission name="android.permission.START_FOREGROUND_SERVICES_FROM_BACKGROUND"/>

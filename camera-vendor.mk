@@ -618,8 +618,7 @@ PRODUCT_COPY_FILES += \
     vendor/oplus/camera/proprietary/odm/etc/init/virtualcameraprovider.rc:$(TARGET_COPY_OUT_ODM)/etc/init/virtualcameraprovider.rc \
     vendor/oplus/camera/proprietary/odm/etc/virtualcamera.json:$(TARGET_COPY_OUT_ODM)/etc/virtualcamera.json \
     vendor/oplus/camera/proprietary/odm/lib64/WideDistortionParams.bin:$(TARGET_COPY_OUT_ODM)/lib64/WideDistortionParams.bin \
-    vendor/oplus/camera/proprietary/system_ext/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml \
-    vendor/oplus/camera/proprietary/system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.oplus.camera.unit.sdk_product.xml
+    vendor/oplus/camera/proprietary/system_ext/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml
 
 PRODUCT_PACKAGES += \
     libAPSClient-cmd-jni-extension.oplus \

@@ -1,2 +1,4 @@
 __pycache__/
 *.pyc
+tests/
+BOOT_FAILURE_ANALYSIS.md

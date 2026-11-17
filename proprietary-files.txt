@@ -4,7 +4,7 @@
 # Apps
 my_product/app/OplusCamera/OplusCamera.apk:system_ext/priv-app/OplusCamera/OplusCamera.apk;OVERRIDES=Camera2,GoogleCameraGo|ddc2c895a5530cbf976efcdbe1d18c0e2c7a6d14
 my_stock/priv-app/OppoGallery2/OppoGallery2.apk:system_ext/priv-app/OppoGallery2/OppoGallery2.apk;OVERRIDES=Gallery2|501796fe9290f5d4bec010161d0908477881fb39
-system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk|361ba1d855100ce6656e4088c5ca1e59d37835be|de9eafc7c70a243b3e918f3172ee6e3a8ed4399c
+system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk|361ba1d855100ce6656e4088c5ca1e59d37835be|7e180919612ab76e62e8ca6c822e3dcb8ed6c015
 
 # Framework
 my_product/product_overlay/framework/com.oplus.camera.unit.sdk.adapter.jar:system_ext/framework/com.oplus.camera.unit.sdk.adapter.jar|b1a9cc28bd0eabc4cbce50047a731e7a11d49f90
@@ -14,7 +14,6 @@ system/framework/oplus-support-wrapper.jar|8dd66d1455749fc6ea0afe4f5baa5ded1756a
 
 # Permissions
 my_product/product_overlay/etc/permissions/oplus_camera_default_grant_permissions_list.xml:system_ext/etc/default-permissions/oplus_camera_default_grant_permissions_list.xml|a094be3888052a1da93c757f47c863ba8c4d9b8a
-my_product/product_overlay/etc/permissions/com.oplus.camera.unit.sdk_product.xml:system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml|498dad906402ecbd10ca51ae6035ff05ae2b6cd4|68261839fbc45778f01b138421c8c6a679c686c6
 
 # Libraries
 system_ext/lib64/libAPSClient-cmd-jni-extension.oplus.so;FIX_SONAME;SYMLINK=system_ext/lib64/libAPSClient-cmd-jni.so|5b0beaf7dd2bfea34abc4950492e5a8692767952|e77016f085cdd96c14b4bbcc90ccbe537e81bd42

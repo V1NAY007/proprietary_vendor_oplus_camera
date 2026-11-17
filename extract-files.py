@@ -3,6 +3,7 @@
 # SPDX-License-Identifier: Apache-2.0
 
 import os
+from pathlib import Path
 import shutil
 import subprocess
 import tempfile
@@ -361,11 +362,41 @@ def decrypt_oplus_camera_configs(ctx, file, file_path, *args, **kwargs):
 
 def patch_oplus_app_platform(ctx, file, file_path, *args, **kwargs):
     dex_path = os.path.join(os.path.dirname(__file__), 'configs', 'dex', 'classes_featureconfig.dex')
-    with zipfile.ZipFile(file_path, 'r') as zin:
-        has_classes2 = 'classes2.dex' in zin.namelist()
-    if not has_classes2:
-        with zipfile.ZipFile(file_path, 'a') as zout:
-            zout.write(dex_path, 'classes2.dex')
+    # Boot-class-path classes win over APK stubs, including inside system_server.
+    replacements = {
+        f'Lcom/oplus/content/{name}': f'Lcom/oplus/camera/compat/{name}'
+        for name in ('OplusFeatureConfigManager', 'IOplusFeatureConfigManager')
+    }
+    with tempfile.TemporaryDirectory() as tmp_dir:
+        with zipfile.ZipFile(file_path, 'r') as zin:
+            dex_files = {
+                name: zin.read(name) for name in zin.namelist()
+                if name.startswith('classes') and name.endswith('.dex')
+            }
+        dex_files.setdefault('classes2.dex', Path(dex_path).read_bytes())
+        for name, data in dex_files.items():
+            dex_file = Path(tmp_dir) / name
+            dex_file.write_bytes(data)
+            smali_dir = Path(tmp_dir) / name.removesuffix('.dex')
+            subprocess.check_call(['baksmali', 'd', str(dex_file), '-o', str(smali_dir)])
+            if name == 'classes2.dex' and not any(
+                smali_dir.rglob('OplusFeatureConfigManager.smali')
+            ):
+                raise ValueError('Expected feature-config stubs in OplusAppPlatform classes2.dex')
+            for smali_file in smali_dir.rglob('*.smali'):
+                content = smali_file.read_text()
+                for old, new in replacements.items():
+                    content = content.replace(old, new)
+                smali_file.write_text(content)
+            subprocess.check_call(['smali', 'a', str(smali_dir), '-o', str(dex_file)])
+            dex_files[name] = dex_file.read_bytes()
+        new_apk = os.path.join(tmp_dir, 'patched.apk')
+        with zipfile.ZipFile(file_path, 'r') as zin, zipfile.ZipFile(new_apk, 'w') as zout:
+            for item in zin.infolist():
+                zout.writestr(item, dex_files.pop(item.filename, zin.read(item.filename)))
+            for name, data in dex_files.items():
+                zout.writestr(name, data)
+        shutil.move(new_apk, file_path)
 
 
 blob_fixups: blob_fixups_user_type = {
@@ -424,13 +455,6 @@ blob_fixups: blob_fixups_user_type = {
         .replace_needed('android.hardware.common-V2-ndk_platform.so', 'android.hardware.common-V2-ndk.so'),
     'system_ext/lib64/libSloganJni.oplus.so': blob_fixup()
         .fix_soname(),
-    'system_ext/etc/permissions/com.oplus.camera.unit.sdk_product.xml': blob_fixup()
-        .regex_replace(r'<\? xml.*?\?>', '<?xml version="1.0" encoding="utf-8"?>')
-        .regex_replace(r'/system/system_ext/', '/system_ext/')
-        .regex_replace(r'<permissions>(?!\s*<library name="oplus-camera-fwk")', '<permissions>\n    <library name="oplus-camera-fwk"\n        file="/system_ext/framework/oplus-camera-fwk.jar" />')
-        .regex_replace(r'(<library name\s*=\s*"com\.oplus\.camera\.unit\.sdk"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />')
-        .regex_replace(r'(<library name\s*=\s*"com\.oppo\.camera\.unit\.sdk"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />')
-        .regex_replace(r'(<library name\s*=\s*"com\.oplus\.camera\.unit\.sdk\.adapter"\s+file\s*=\s*"[^"]+")\s*/>', r'\1\n        dependency="oplus-camera-fwk" />'),
     'system_ext/framework/com.oplus.camera.unit.sdk.jar': blob_fixup()
         .call(patch_camera_unit_sdk),
     'system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk': blob_fixup()

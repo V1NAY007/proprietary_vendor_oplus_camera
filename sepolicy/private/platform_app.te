@@ -1,2 +1,1 @@
-get_prop(platform_app_all, vendor_camera_prop)
-allow platform_app_all same_process_hal_file:file r_file_perms;
+get_prop(platform_app, vendor_camera_prop)

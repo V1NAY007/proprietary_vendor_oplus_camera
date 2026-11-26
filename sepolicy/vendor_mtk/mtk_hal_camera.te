@@ -1,3 +1,6 @@
 allow mtk_hal_camera vendor_camera_data_file:dir create_dir_perms;
 allow mtk_hal_camera vendor_camera_data_file:file create_file_perms;
 get_prop(mtk_hal_camera, vendor_camera_prop)
+
+# MIDAS runs in hal_camera_default and is called by the MTK camera HAL.
+binder_call(mtk_hal_camera, hal_camera_default)

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<permissions>
+    <!-- Oplus Camera opens the system:camera APUSys node for neural processing. -->
+    <permission name="mediatek.permission.ACCESS_APU_SYS">
+        <group gid="camera" />
+    </permission>
+</permissions>

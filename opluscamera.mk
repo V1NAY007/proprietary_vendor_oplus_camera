@@ -11,6 +11,7 @@ PRODUCT_PACKAGES += \
 # Packages
 PRODUCT_PACKAGES += \
     OplusCameraOverlayIcon \
+    OplusCameraPermissions \
     ColorOSGalleryShim \
     libgui_shim_opluscamera \
     libcamera_device_shim \
@@ -26,6 +27,7 @@ PRODUCT_COPY_FILES += \
     vendor/oplus/camera/configs/permissions/com.oplus.camera.unit.sdk.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/com.oplus.camera.unit.sdk.xml \
     vendor/oplus/camera/configs/permissions/default-permissions-com.oplus.camera.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/default-permissions/default-permissions-com.oplus.camera.xml \
     vendor/oplus/camera/configs/permissions/privapp-permissions-opluscamera.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-opluscamera.xml \
+    vendor/oplus/camera/configs/permissions/opluscamera-apu.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/opluscamera-apu.xml \
     vendor/oplus/camera/configs/permissions/opluscamera-hiddenapi-package-allowlist.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/sysconfig/opluscamera-hiddenapi-package-allowlist.xml \
     vendor/oplus/camera/configs/permissions/oplus_google_lens_config.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/oplus_google_lens_config.xml \
     vendor/oplus/camera/configs/permissions/privapp-permissions-oplus.xml:$(TARGET_COPY_OUT_SYSTEM_EXT)/etc/permissions/privapp-permissions-oplus.xml \

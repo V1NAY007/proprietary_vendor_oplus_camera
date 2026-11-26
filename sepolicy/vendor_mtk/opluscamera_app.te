@@ -16,5 +16,8 @@ allowxperm opluscamera_app proc_mtk_jpeg:file ioctl {
 # Picture Quality HAL
 hal_client_domain(opluscamera_app, hal_mtk_pq)
 
+# APUSys neural processing runs inside the camera app.
+allow opluscamera_app apusys_device:chr_file rw_file_perms;
+
 # Properties
 get_prop(opluscamera_app, vendor_mtk_cam_security_prop)

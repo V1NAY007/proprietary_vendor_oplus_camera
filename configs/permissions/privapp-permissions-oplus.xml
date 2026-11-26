@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <permissions>
-     <!-- OPLUS camera unit sdk adapter -->
-     <library name = "com.oplus.camera.unit.sdk.adapter"
-        file = "/system_ext/framework/com.oplus.camera.unit.sdk.adapter.jar" />
-
-     <!-- OPLUS camera unit sdk -->
-     <library name = "com.oplus.camera.unit.sdk"
-        file = "/system_ext/framework/com.oplus.camera.unit.sdk.jar" />
-
      <!-- OPLUS appplatform -->
      <privapp-permissions package="com.oplus.appplatform">
         <permission name="android.permission.BLUETOOTH_PRIVILEGED"/>

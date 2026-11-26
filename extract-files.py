@@ -4,6 +4,7 @@
 
 import os
 from pathlib import Path
+import re
 import shutil
 import subprocess
 import tempfile
@@ -47,6 +48,51 @@ lib_fixups: lib_fixups_user_type = {
         'vendor.oplus.hardware.virtual_device.camera.manager@1.0',
     ): lib_fixup_system_ext_suffix,
 }
+
+
+def patch_high_definition_raw16(smali_dir):
+    # Zephyr advertises RAW_SENSOR, not the RAW10 forced by this SDK's raw_output path.
+    path = Path(smali_dir) / 'com/oplus/ocs/camera/producer/mode/HighDefinitionMode.smali'
+    content = path.read_text()
+    hint = '''.method protected getRawFormatHint(Ljava/lang/String;)I
+    .registers 2
+
+    const/16 v0, 0x20
+    return v0
+.end method'''
+    content, count = re.subn(
+        r'\.method protected getRawFormatHint\(Ljava/lang/String;\)I\n.*?\.end method',
+        lambda _: hint, content, flags=re.DOTALL,
+    )
+    if count != 1:
+        raise ValueError('Expected one HighDefinitionMode raw format hint')
+    signature = '.method public getSurfaceFormatBySurfaceType(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I'
+    surface = signature + '''
+    .registers 5
+
+    const-string v0, "raw_output"
+    invoke-virtual {v0, p1}, Ljava/lang/String;->equals(Ljava/lang/Object;)Z
+    move-result v0
+    if-eqz v0, :stock_surface
+
+    const/16 v0, 0x20
+    return v0
+
+    :stock_surface
+    invoke-super {p0, p1, p2, p3}, Lcom/oplus/ocs/camera/producer/mode/BaseMode;->getSurfaceFormatBySurfaceType(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)I
+    move-result v0
+    return v0
+.end method'''
+    if signature not in content:
+        content += '\n' + surface + '\n'
+    else:
+        match = re.search(re.escape(signature) + r'\n.*?\.end method', content, re.DOTALL)
+        # Baksmali renumbers branch labels after a DEX round trip.
+        normalize = lambda text: re.sub(r'\s+', '', re.sub(r':[A-Za-z0-9_]+', ':label', text))
+        if match is None or normalize(match.group()) != normalize(surface):
+            raise ValueError('Unexpected HighDefinitionMode surface format override')
+        content = content[:match.start()] + surface + content[match.end():]
+    path.write_text(content)
 
 
 def patch_camera_unit_sdk(ctx, file, file_path, *args, **kwargs):
@@ -323,6 +369,8 @@ def patch_camera_unit_sdk(ctx, file, file_path, *args, **kwargs):
         camera_smali_dir = os.path.join(os.path.dirname(__file__), 'camera-smali')
         if os.path.exists(camera_smali_dir):
             shutil.copytree(camera_smali_dir, smali_dir, dirs_exist_ok=True)
+
+        patch_high_definition_raw16(smali_dir)
 
         new_dex = os.path.join(tmp_dir, 'classes_new.dex')
         subprocess.check_call(['smali', 'a', smali_dir, '-o', new_dex])

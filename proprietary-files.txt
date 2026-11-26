@@ -8,7 +8,7 @@ system_ext/priv-app/OplusAppPlatform/OplusAppPlatform.apk|361ba1d855100ce6656e40
 
 # Framework
 my_product/product_overlay/framework/com.oplus.camera.unit.sdk.adapter.jar:system_ext/framework/com.oplus.camera.unit.sdk.adapter.jar|b1a9cc28bd0eabc4cbce50047a731e7a11d49f90
-my_product/product_overlay/framework/com.oplus.camera.unit.sdk.jar:system_ext/framework/com.oplus.camera.unit.sdk.jar|66d92899315fe3f0c191efa211d07a6fa0a8e304|37f84ebf474dd91bbc7961ecb362a49dafd8f0e1
+my_product/product_overlay/framework/com.oplus.camera.unit.sdk.jar:system_ext/framework/com.oplus.camera.unit.sdk.jar|66d92899315fe3f0c191efa211d07a6fa0a8e304|9eceb1469f79d39d80bde874eb59db93dc465cc9
 system_ext/framework/androidx.camera.extensions.impl.jar|f4dc53309c3b4d0561f5d77b337f9bed67c2e779
 system/framework/oplus-support-wrapper.jar|8dd66d1455749fc6ea0afe4f5baa5ded1756a53f
 

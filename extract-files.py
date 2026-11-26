@@ -94,6 +94,26 @@ def patch_high_definition_raw16(smali_dir):
         content = content[:match.start()] + surface + content[match.end():]
     path.write_text(content)
 
+    # Capture-target selection must use the same raw format as the ImageReader.
+    signature = '.method protected getRawFormat(Ljava/lang/String;)I'
+    raw_format = signature + '''
+    .registers 2
+
+    const/16 p0, 0x20
+    return p0
+.end method'''
+    for mode in ('HighDefinitionMode', 'MacroMode'):
+        path = Path(smali_dir) / f'com/oplus/ocs/camera/producer/mode/{mode}.smali'
+        content = path.read_text()
+        if signature not in content:
+            content += '\n' + raw_format + '\n'
+        else:
+            match = re.search(re.escape(signature) + r'\n.*?\.end method', content, re.DOTALL)
+            if match is None or re.sub(r'\s+', '', match.group()) != re.sub(r'\s+', '', raw_format):
+                raise ValueError(f'Unexpected {mode} raw format override')
+            content = content[:match.start()] + raw_format + content[match.end():]
+        path.write_text(content)
+
 
 def patch_camera_unit_sdk(ctx, file, file_path, *args, **kwargs):
     with tempfile.TemporaryDirectory() as tmp_dir:
